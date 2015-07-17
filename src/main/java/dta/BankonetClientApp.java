@@ -5,10 +5,13 @@ package dta;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
+
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -41,7 +44,7 @@ public class BankonetClientApp {
 		
 		Reflections reflections = new Reflections("dta");
 
-		 Set<Class<? extends Action>> action = reflections.getSubTypesOf(Action.class);
+		 Set<Class<? extends Action>> actions = reflections.getSubTypesOf(Action.class);
 		
 		List<Action> list = new ArrayList<Action>();
 		
@@ -58,11 +61,40 @@ public class BankonetClientApp {
 		 * à finir
 		 * 
 		 */
-//		for(Action act : list)
-//		
-//		
-//		Collection.sort(list,(o1,o2)->o1.getId().compareTo(o2.getId()));
-//		TreeSet<Action> actionsJava8 = new TreeSet<>((o1,o2)->o1.getId().compareTo(o2.getId()));
+		for (Class<? extends Action> subType : actions){ 
+ 			 
+ 			try { 
+ 				Action newInstance = subType.newInstance(); 
+ 				list.add(newInstance); 
+ 			} catch (InstantiationException e) { 
+ 				// TODO Auto-generated catch block 
+ 				e.printStackTrace(); 
+ 			} catch (IllegalAccessException e) { 
+ 				// TODO Auto-generated catch block 
+ 				e.printStackTrace(); 
+ 			} 
+ 			 
+     	} 
+ 
+		Collections.sort(list,(o1,o2)->o1.getId().compareTo(o2.getId()));
+		//TreeSet<Action> actionsJava8 = new TreeSet<>((o1,o2)->o1.getId().compareTo(o2.getId()));
+		
+		for (Action instance : list){ 
+ 			System.out.println(instance.getId().toString() +" "+ instance.getMenu()); 
+ 		} 
+ 		 
+ 		Scanner sc = new Scanner(System.in); 
+ 		Integer choice = sc.nextInt(); 
+ 		sc.close(); 
+ 		 
+ 		for (Action instance : list ) 
+ 		{ 
+ 			if (choice == instance.getId()) 
+ 			{ 
+ 				instance.execute(); 
+ 			} 
+ 		} 
+
 
 	}
 
