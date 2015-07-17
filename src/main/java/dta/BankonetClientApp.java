@@ -9,10 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-
-
-
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -38,10 +34,11 @@ public class BankonetClientApp {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		RestServerInfoHelper restserverinfohelper = new RestServerInfoHelper(); // instanciation de la classe RestServerInfoHelper()
-//		String urlactuelle = restserverinfohelper.getRestServerInfo().getBaseUrl();//restserverinfohelper appel la classe getRestServerInfo() qui appel la méthode getBaseUrl() 
-//		
-//		System.out.println(""+urlactuelle);
+		RestServerInfoHelper restserverinfohelper = new RestServerInfoHelper(); // instanciation de la classe RestServerInfoHelper()
+		String urlactuelle = restserverinfohelper.getRestServerInfo().getBaseUrl();//restserverinfohelper appel la classe getRestServerInfo() qui appel la méthode getBaseUrl() 
+		
+		System.out.println(""+urlactuelle);
+		
 		Reflections reflections = new Reflections("dta");
 
 		 Set<Class<? extends Action>> action = reflections.getSubTypesOf(Action.class);
@@ -56,11 +53,16 @@ public class BankonetClientApp {
 //		});
 //		actions.addAll(actions);
 		
-		
-		
-		
-		Collection.sort(list,(o1,o2)->o1.getId().compareTo(o2.getId()));
-		TreeSet<Action> actionsJava8 = new TreeSet<>((o1,o2)->o1.getId().compareTo(o2.getId()));
+		/*
+		 * 
+		 * à finir
+		 * 
+		 */
+//		for(Action act : list)
+//		
+//		
+//		Collection.sort(list,(o1,o2)->o1.getId().compareTo(o2.getId()));
+//		TreeSet<Action> actionsJava8 = new TreeSet<>((o1,o2)->o1.getId().compareTo(o2.getId()));
 
 	}
 
