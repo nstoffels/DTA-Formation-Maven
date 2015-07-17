@@ -38,7 +38,7 @@ public class RestServerInfo {
 	/**
 	 * @return the port
 	 */
-	private String getPort() {
+	String getPort() {
 		return port;
 	}
 
@@ -52,7 +52,7 @@ public class RestServerInfo {
 	/**
 	 * @return the host
 	 */
-	private String getHost() {
+	String getHost() {
 		return host;
 	}
 
@@ -66,7 +66,7 @@ public class RestServerInfo {
 	/**
 	 * @return the protocol
 	 */
-	private String getProtocol() {
+	String getProtocol() {
 		return protocol;
 	}
 
