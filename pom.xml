@@ -4,7 +4,47 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   <groupId>dta</groupId>
   <artifactId>bankonet-client</artifactId>
   <version>1</version>
-  <build><finalName>banko-client</finalName></build>
+  <build><finalName>banko-client</finalName>
+  
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+        	<archive>
+            <manifest>
+              <mainClass>dta.BankonetClientApp</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Main-Class>dta.BankonetClientApp</Main-Class>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
   <dependencies>
   	<dependency>
   		<groupId>junit</groupId>
@@ -17,8 +57,39 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   		<artifactId>reflections</artifactId>
   		<version>0.9.10</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.glassfish.jersey.core</groupId>
+  		<artifactId>jersey-client</artifactId>
+  		<version>2.19</version>
+  	</dependency>
+  	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.6.0</version>
+	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.json</groupId>
+  		<artifactId>json</artifactId>
+  		<version>20141113</version>
+  	</dependency>
+  	<dependency>
+	<groupId>javax.ws.rs</groupId>
+	<artifactId>javax.ws.rs-api</artifactId>
+	<version>2.0.1</version>
+	</dependency>
+  	<dependency>
+		<groupId>org.glassfish.jersey.media</groupId>
+		<artifactId>jersey-media-json-jackson</artifactId>
+		<version>2.19</version>
+	</dependency>
   </dependencies>
-  <properties>
+ <properties>
   	<junit.version>4.12</junit.version>
   </properties>
+  
+  
 </project>
+
+
+

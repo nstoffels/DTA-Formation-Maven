@@ -7,8 +7,11 @@ package dta.ihm;
  * @author ETY
  *
  */
-public abstract class ArreterProgrammeAction implements Action{
-
+public class ArreterProgrammeAction implements Action{
+	
+//	private Integer identifiant = 0;
+//	private String menu = "Arrêter le programme";
+	
 	/* (non-Javadoc)
 	 * @see dta.ihm.Action#getId()
 	 */
@@ -22,7 +25,8 @@ public abstract class ArreterProgrammeAction implements Action{
 	 */
 	public String getMenu() {
 		// TODO Auto-generated method stub
-		return "Arrêter programme";
+		return "Arrêter le programme";
+		//return this.menu;
 	}
 
 	/* (non-Javadoc)
@@ -31,6 +35,7 @@ public abstract class ArreterProgrammeAction implements Action{
 	public void execute() {
 		// TODO Auto-generated method stub
 		System.out.println("extinction");
+		System.exit(0);
 	}
 
 	

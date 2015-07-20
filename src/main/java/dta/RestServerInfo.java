@@ -22,9 +22,9 @@ public class RestServerInfo {
 	 * 
 	 */
 	
-	String getBaseUrl(){
+	public String getBaseUrl(){
 		
-		String url = (protocol+"://").concat(host+":").concat(port);
+		String url = (protocol+"://").concat(host+":").concat(port+"/appServer");
 		return url;
 	}
 	

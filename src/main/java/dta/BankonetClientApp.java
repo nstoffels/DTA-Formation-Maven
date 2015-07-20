@@ -39,63 +39,73 @@ public class BankonetClientApp {
 		// TODO Auto-generated method stub
 		RestServerInfoHelper restserverinfohelper = new RestServerInfoHelper(); // instanciation de la classe RestServerInfoHelper()
 		String urlactuelle = restserverinfohelper.getRestServerInfo().getBaseUrl();//restserverinfohelper appel la classe getRestServerInfo() qui appel la méthode getBaseUrl() 
+		RestServerInfo server = restserverinfohelper.getRestServerInfo();
 		
 		System.out.println(""+urlactuelle);
 		
-		Reflections reflections = new Reflections("dta");
-
-		 Set<Class<? extends Action>> actions = reflections.getSubTypesOf(Action.class);
+		Reflections reflections = new Reflections("dta");  
+		Set<Class<? extends Action>> listedesclasses = reflections.getSubTypesOf(Action.class); 
+	  
+		  
+		  
+		 Scanner sc = new Scanner(System.in); 
+//		 Integer choix = sc.nextInt();
+		 List<Action> liste = new ArrayList<Action>(); 
+//		 sc.close();
+		 
+		 for (Class<? extends Action> type : listedesclasses){ 
 		
-		List<Action> list = new ArrayList<Action>();
+			try { 
+				Action action = type.newInstance(); 
+				liste.add(action); 
+			} catch (InstantiationException e) { 
+				// TODO Auto-generated catch block 
+				e.printStackTrace(); 
+			} catch (IllegalAccessException e) { 
+				// TODO Auto-generated catch block 
+				e.printStackTrace(); 
+			} 
+			 
+		 } 
+		 //création d'un comparateur pour trier par Id ma liste
+		 Comparator<Action> comparator = new Comparator<Action>() { 
+			 	public int compare(Action o1, Action o2) { 
+			 		return o1.getId().compareTo(o2.getId()); 
+			 	} 
+		 };
+		Collections.sort(liste, comparator); 
+		 
+//		for (Action instance : liste) 
+//		{ 
+//			System.out.println(instance.getId().toString() +" "+ instance.getMenu()); 
+//		} 
+		 
+		 
+		 
+		 
+//		for (Action instance : liste ) 
+//		{ 
+//			if (choix == instance.getId()) 
+//			{ 
+//				instance.execute(); 
+//			} 
+//		} 
+//		sc.close();
 		
-//		TreeSet<Action> actions = new TreeSet<>(new Comparator<Action>() {
-//			@Override
-//			public int compare(Action o1, Action o2){
-//				return o1.getId().compareTo(o2.getId());
-//			}
-//		});
-//		actions.addAll(actions);
-		
-		/*
-		 * 
-		 * à finir
-		 * 
-		 */
-		for (Class<? extends Action> subType : actions){ 
- 			 
- 			try { 
- 				Action newInstance = subType.newInstance(); 
- 				list.add(newInstance); 
- 			} catch (InstantiationException e) { 
- 				// TODO Auto-generated catch block 
- 				e.printStackTrace(); 
- 			} catch (IllegalAccessException e) { 
- 				// TODO Auto-generated catch block 
- 				e.printStackTrace(); 
- 			} 
- 			 
-     	} 
- 
-		Collections.sort(list,(o1,o2)->o1.getId().compareTo(o2.getId()));
-		//TreeSet<Action> actionsJava8 = new TreeSet<>((o1,o2)->o1.getId().compareTo(o2.getId()));
-		
-		for (Action instance : list){ 
+		while(true){
+			
+			System.out.println("***Bankonet!client***");
+			System.out.println("");
+			for (Action instance : liste){ 
+			
  			System.out.println(instance.getId().toString() +" "+ instance.getMenu()); 
- 		} 
- 		 
- 		Scanner sc = new Scanner(System.in); 
- 		Integer choice = sc.nextInt(); 
- 		sc.close(); 
- 		 
- 		for (Action instance : list ) 
- 		{ 
- 			if (choice == instance.getId()) 
- 			{ 
- 				instance.execute(); 
- 			} 
- 		} 
+			}
 
-
+			System.out.println("choisir une option");
+			Integer input = sc.nextInt();
+			System.out.println("");
+			liste.get(Integer.valueOf(input)).execute();
+		}
 	}
 
 }
